@@ -1,30 +1,38 @@
-:root {
+/* :root {
   --grid-columns: 16;
   --grid-rows: 16;
+} */
+body {
+  text-align: center;
 }
 
-#etchContainer {
+h1 {
+  font-family: "VT323";
+  font-size: 4rem;
+}
+
+main {
+  margin: auto;
+  text-align: center;
+  width: 50vw;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-content: center;
+  align-items: center;
+}
+
+#gridContainer {
   margin: auto;
   display: grid;
-  height: 95vh;
-  width: 95vh;
+  height: 50vh;
+  width: 50vh;
   justify-content: center;
   align-items: center;
   grid-template-columns: repeat(var(--grid-columns), 1fr);
   grid-template-rows: repeat(var(--grid-rows), 1fr);
+  grid-column: span 2fr;
 }
 
-/* 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr */
-#etchContainer * {
-  padding: 0;
-  margin: 0;
-}
-
-#etchContainer div {
-  outline: 1px solid black;
-  margin: 0;
-  padding: 0;
-  background-color: #ffffff;
-  height: 2vw;
-  width: 2vw;
+footer {
+  padding: 1rem;
 }
