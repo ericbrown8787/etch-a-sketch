@@ -18,19 +18,52 @@
       <h1>Etch-A-Sketch</h1>
     </header>
     <main>
-      <fieldset class="leftSideButtons">
-        <label for="gridDimensions">Grid Dimensions:</label>
-        <input
-          type="number"
-          id="gridDimensions"
-          name="gridDimensions"
-          value="16"
-          min="1"
-          max="100"
-        />
-        <label id="dimensionsMultiplier" for="gridDimensions"></label>
+      <fieldset id="leftSideButtons">
+        <!-- Slider to set grid dimensions -->
+        <div>
+          <label for="gridDimensions" id="dimensionsMultiplier"></label>
+          <input
+            type="range"
+            min="1"
+            max="100"
+            value="16"
+            id="gridDimensions"
+          />
+        </div>
 
-        <button id="generateGridButton">Generate Grid</button>
+        <!-- Color Selection Buttons -->
+        <div id="colorSelect">
+          <!-- Black Radio Button -->
+          <input
+            type="radio"
+            id="colorBlack"
+            name="colorModeInput"
+            value="black"
+            checked
+          />
+          <label for="colorBlack">Black</label>
+
+          <!-- White Radio Button -->
+          <input
+            type="radio"
+            id="colorWhite"
+            name="colorModeInput"
+            value="white"
+          />
+          <label for="colorWhite">White</label>
+
+          <!-- Random Radio Button -->
+          <input
+            type="radio"
+            id="colorRandom"
+            name="colorModeInput"
+            value="random"
+          />
+          <label for="colorRandom">Random</label>
+        </div>
+
+        <!-- Generate New Grid Button -->
+        <button id="generateGridButton">Generate New Grid</button>
       </fieldset>
       <div id="gridContainer"></div>
     </main>

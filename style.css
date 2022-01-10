@@ -1,14 +1,19 @@
-/* :root {
-  --grid-columns: 16;
-  --grid-rows: 16;
-} */
+:root {
+  /* --grid-columns: 16;
+  --grid-rows: 16; */
+  --main-background-color: #d09dfa;
+  --button-background-color: #31253b;
+  --active-button-background-color: #664d7a;
+}
+
 body {
   text-align: center;
+  background-color: var(--main-background-color);
 }
 
 h1 {
   font-family: "VT323";
-  font-size: 4rem;
+  font-size: 5rem;
 }
 
 main {
@@ -19,18 +24,50 @@ main {
   grid-template-columns: 1fr 2fr;
   justify-content: center;
   align-items: center;
+  max-width: 90vh;
 }
 
 #gridContainer {
   margin: auto;
   display: grid;
-  height: 50vh;
-  width: 50vh;
+  height: 70vh;
+  width: 70vh;
   justify-content: center;
   align-items: center;
   grid-template-columns: repeat(var(--grid-columns), 1fr);
   grid-template-rows: repeat(var(--grid-rows), 1fr);
   grid-column: span 2fr;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+#colorSelect label {
+  color: whitesmoke;
+  display: block;
+  width: fit-content;
+  margin: 0.5rem auto;
+  padding: 0.3rem;
+  border-radius: 10px;
+  background-color: var(--button-background-color);
+  border: 4px outset var(--active-button-background-color);
+}
+
+#colorRandom:checked + label[for="colorRandom"],
+#colorBlack:checked + label[for="colorBlack"],
+#colorWhite:checked + label[for="colorWhite"] {
+  background-color: var(--active-button-background-color);
+  border: 4px inset var(--button-background-color);
+}
+
+#colorSelect {
+  text-align: center;
+}
+
+#leftSideButtons {
+  display: flex;
+  flex-direction: column;
 }
 
 footer {

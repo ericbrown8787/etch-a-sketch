@@ -1,10 +1,20 @@
-// const gridContainer = document.getElementById("gridContainer");
-// const root = document.querySelector(":root");
+//%%%%%%%%%%%%%%%%%% Global Variables
+const generateGridButton = document.getElementById("generateGridButton");
 
-// const etchBoxContent = document.createTextNode("meow");
+const gridDimensionsInput = document.getElementById("gridDimensions");
 
+let gridDimensions = gridDimensionsInput.valueAsNumber;
+
+function randomColor() {
+  let r = () => (Math.random() * 256) >> 0;
+  let color = `rgb(${r()}, ${r()}, ${r()})`;
+  return color;
+}
+
+//%%%%%%%%%%%%%%%%%%%%%%%%% Functions
 function populateGrid(squaresPerSide) {
   const gridContainer = document.getElementById("gridContainer");
+  // Placing Grid Box divs in document fragment before appending to improve performance
   const gridContents = document.createDocumentFragment();
   const root = document.querySelector(":root");
   let boxHeight = gridContainer.offsetHeight / squaresPerSide;
@@ -17,6 +27,7 @@ function populateGrid(squaresPerSide) {
   //Clears previous grid content, if any
   gridContainer.innerHTML = "";
 
+  //Loop to append grid boxes to grid container div with styling
   for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
     let gridBox = document.createElement("div");
     gridBox.style.cssText = `height: ${boxHeight}px; 
@@ -26,50 +37,54 @@ function populateGrid(squaresPerSide) {
       padding: 0;
       background-color: #ffffff;`;
     gridBox.classList.add("etchPixel");
-    gridBox.textContent = " ";
     gridContents.appendChild(gridBox);
   }
-
   gridContainer.appendChild(gridContents);
 }
 
+//Adds color change functionality on mouseover to each grid pixel
 function changeColor() {
+  const colorModeInput = document.getElementsByName("colorModeInput");
   const etchPixels = document.querySelectorAll(".etchPixel");
+
   etchPixels.forEach((pixel) => {
     pixel.addEventListener("mouseenter", () => {
-      pixel.style.backgroundColor = "#000000";
+      let colorMode;
+      let pixelColor;
+      for (let option of colorModeInput) {
+        if (option.checked) {
+          colorMode = option.value;
+        }
+      }
+      if (colorMode === "black") {
+        pixelColor = "#000000";
+      } else if (colorMode === "random") {
+        pixelColor = randomColor();
+      } else if (colorMode === "white") {
+        pixelColor = "#FFFFFF";
+      }
+      pixel.style.backgroundColor = pixelColor;
     });
   });
 }
 
+//generates a new grid and attaches event listeners to each pixel
 function generateNewGrid() {
   populateGrid(gridDimensions);
   changeColor();
 }
 
-const generateGridButton = document.getElementById("generateGridButton");
-
-const gridDimensionsInput = document.getElementById("gridDimensions");
-
-let gridDimensions = gridDimensionsInput.valueAsNumber;
-
-// gridDimensionsInput.addEventListener("input", (inputEvent) => {
-//   const charCode = inputEvent.charCode;
-//   if (charCode < 48 || charCode > 57) {
-//     inputEvent.preventDefault();
-//     alert("Invalid!");
-//     console.log("this worked");
-//   }
-// });
-
+//%%%%%%%%%%%%%%%%%%%%%%%%% Event Listeners
 gridDimensionsInput.addEventListener("input", () => {
   gridDimensions = gridDimensionsInput.valueAsNumber;
   const dimensionsMultiplier = document.getElementById("dimensionsMultiplier");
-  dimensionsMultiplier.innerHTML = ` x ${gridDimensions}`;
+  dimensionsMultiplier.innerHTML = `Grid Dimensions: ${gridDimensions}x${gridDimensions}`;
 });
 
 generateGridButton.addEventListener("click", () => {
   generateNewGrid();
 });
 
+//%%%%%%%%%%%%%%%%%%%%%%%%% Code To Execute on Page Load
 generateNewGrid(gridDimensions);
+dimensionsMultiplier.innerHTML = `Grid Dimensions: ${gridDimensions} x ${gridDimensions}`;
