@@ -18,17 +18,11 @@
       <h1>Etch-A-Sketch</h1>
     </header>
     <main>
-      <fieldset id="leftSideButtons">
+      <fieldset id="topButtons">
         <!-- Slider to set grid dimensions -->
-        <div>
+        <div id="gridSlider">
           <label for="gridDimensions" id="dimensionsMultiplier"></label>
-          <input
-            type="range"
-            min="1"
-            max="100"
-            value="16"
-            id="gridDimensions"
-          />
+          <input type="range" min="1" max="64" value="16" id="gridDimensions" />
         </div>
 
         <!-- Color Selection Buttons -->
@@ -65,7 +59,9 @@
         <!-- Generate New Grid Button -->
         <button id="generateGridButton">Generate New Grid</button>
       </fieldset>
-      <div id="gridContainer"></div>
+      <div class="backgroundBox">
+        <div id="gridContainer"></div>
+      </div>
     </main>
     <footer>&copy; Eric Brown 2021</footer>
     <script src="app.js" defer></script>

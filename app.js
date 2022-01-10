@@ -17,8 +17,7 @@ function populateGrid(squaresPerSide) {
   // Placing Grid Box divs in document fragment before appending to improve performance
   const gridContents = document.createDocumentFragment();
   const root = document.querySelector(":root");
-  let boxHeight = gridContainer.offsetHeight / squaresPerSide;
-  let boxWidth = gridContainer.offsetWidth / squaresPerSide;
+  let boxSide = gridContainer.offsetHeight / squaresPerSide;
 
   //Allocates space in grid based on input value
   root.style.setProperty("--grid-columns", `${squaresPerSide}`);
@@ -30,9 +29,9 @@ function populateGrid(squaresPerSide) {
   //Loop to append grid boxes to grid container div with styling
   for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
     let gridBox = document.createElement("div");
-    gridBox.style.cssText = `height: ${boxHeight}px; 
-      width: ${boxWidth}px;
-      outline: 1px solid black;
+    gridBox.style.cssText = `height: ${boxSide}px; 
+      width: ${boxSide}px;
+      outline: 1px solid gray;
       margin: 0;
       padding: 0;
       background-color: #ffffff;`;
@@ -56,6 +55,7 @@ function changeColor() {
           colorMode = option.value;
         }
       }
+
       if (colorMode === "black") {
         pixelColor = "#000000";
       } else if (colorMode === "random") {
